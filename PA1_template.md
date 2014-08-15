@@ -82,6 +82,26 @@ steps_mean
 
 ![plot of chunk averagedaily](figures/averagedaily.png) 
 
+Q: Which 5-minute interval, on average across all the days in the dataset,     
+   contains the maximum number of steps?
+
+
+```r
+activity <- aggregate(formula=steps~interval, data=data,
+            FUN=mean, na.rm=TRUE)
+
+# Get the data for the interval with the most average activity across the days
+maximum_steps <- activity[which(activity$steps==max(activity$steps)),]
+maximum_steps
+```
+
+```
+##     interval steps
+## 104      835 206.2
+```
+
+The interval 835 contains the maximum number of steps (206.1698 on average across all the days)
+
 ## Imputing missing values
 
 

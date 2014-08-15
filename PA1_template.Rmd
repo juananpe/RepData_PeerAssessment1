@@ -2,7 +2,9 @@
 title: 'Reproducible Research: Peer Assessment 1'
 author: "Juanan Pereira"
 date: "15 de agosto de 2014"
-output: html_document
+output:
+  html_document:
+    keep_md: yes
 ---
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path='figures/')
@@ -69,6 +71,20 @@ steps_mean <- qplot(x=interval, y=steps,
 
 steps_mean
 ```
+
+Q: Which 5-minute interval, on average across all the days in the dataset,     
+   contains the maximum number of steps?
+
+```{r maxinterval}
+activity <- aggregate(formula=steps~interval, data=data,
+            FUN=mean, na.rm=TRUE)
+
+# Get the data for the interval with the most average activity across the days
+maximum_steps <- activity[which(activity$steps==max(activity$steps)),]
+maximum_steps
+```
+
+The interval 835 contains the maximum number of steps (206.1698 on average across all the days)
 
 ## Imputing missing values
 
